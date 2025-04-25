@@ -97,7 +97,7 @@
 在使用 MCP Server 之前，需要先获取阿里云的 AccessKeyId 和 AccessKeySecret，请参考 [阿里云 AccessKey 管理](https://help.aliyun.com/document_detail/53045.html)
 
 
-#### 使用 pip 安装
+##### 使用 pip 安装
 > ⚠️ 需要 Python 3.10 及以上版本。
 
 直接使用 pip 安装即可，安装命令如下：
@@ -222,4 +222,5 @@ python -m mcp_server_aliyun_observability --transport sse --access-key-id <your_
 ![image](./images/chatwise_inter.png)
 
 ![image](./images/chatwise_demo.png)
+
 
