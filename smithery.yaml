@@ -1,0 +1,46 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required: []
+    properties:
+      accessKeyId:
+        type: string
+        description: Alibaba Cloud Access Key ID
+      accessKeySecret:
+        type: string
+        description: Alibaba Cloud Access Key Secret
+      transport:
+        type: string
+        default: stdio
+        description: "Transport type: stdio or sse"
+      logLevel:
+        type: string
+        default: INFO
+        description: Log level
+      transportPort:
+        type: number
+        default: 8000
+        description: Transport port, used for SSE
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => {
+      const args = ['-m', 'mcp_server_aliyun_observability', '--transport', config.transport, '--log-level', config.logLevel, '--transport-port', String(config.transportPort)];
+      if (config.accessKeyId) {
+        args.push('--access-key-id', config.accessKeyId);
+      }
+      if (config.accessKeySecret) {
+        args.push('--access-key-secret', config.accessKeySecret);
+      }
+      return { command: 'python', args };
+    }
+  exampleConfig:
+    accessKeyId: AKIDEXAMPLE
+    accessKeySecret: SECRETEXAMPLE
+    transport: stdio
+    logLevel: INFO
+    transportPort: 8000
